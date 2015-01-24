@@ -29,12 +29,21 @@ function savesettings()
     $("#saved").append("<strong>SAVED!</strong>");
 }
 
+function nodeContainsCensored(badword, censors) {
+    for(var i = 0; i < censors.length; i++)
+        {
+            if(badword.trim().toLowerCase().indexOf(censors[i].trim().toLowerCase()) != -1)
+                return true;
+        }
+    return false;
+}
+
 function filter(jNode) 
 {
     try{
         var temp = jNode[0];
         var badword = temp.innerHTML;
-        if(censors.indexOf(badword.trim().toLowerCase()) != -1)
+        if(nodeContainsCensored(badword, censors))//(censors.indexOf(badword.trim().toLowerCase()) != -1)
         {
             temp = temp.parentNode;
             for (var a=0; a<15; a++) {
